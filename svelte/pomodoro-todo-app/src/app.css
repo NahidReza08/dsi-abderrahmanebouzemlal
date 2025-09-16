@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --default-font-size: 14px;
+  --default-font-weight: 400;
+
+  --color-purple-dark: #681a73;
+  --color-purple-darkest: #541c8c;
+  --color-blue-dark: #2f1ca6;
+  --color-grey-dark: #282c40;
+
+  --color-purple-light: #ae6bf2;
+  --color-purple-medium: #8448d9;
+  --color-blue-medium: #5f72d9;
+  --color-blue-light: #7ea5f2;
+  --color-ciel: hsl(192, 100%, 67%);
+  --color-pinkish: hsl(280, 87%, 65%);
+  --color-gradient-ciel-pinkish: linear-gradient(
+    90deg,
+    #7ea5f2 0%,
+    #ae6bf2 100%
+  );
+
+  --background-image-light-desktop: url("/images/bg-desktop-light.jpg");
+  --background-image-dark-desktop: url("/images/bg-desktop-dark.jpg");
+  --background-image-mobile-dark: url("/images/bg-mobile-dark.jpg");
+  --background-image-mobile-light: url("/images/bg-mobile-light.jpg");
+}
