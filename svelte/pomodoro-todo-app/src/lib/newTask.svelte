@@ -1,19 +1,17 @@
 <script>
 // @ts-nocheck
+    import TaskForm from "./taskForm.svelte";
     import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     // iLmport { creaLteEventDispatcher } from 'svelte';
     // const dispatch = createEventDispatcher();
 
-    let {task = $bindable()} = $props();
+    let {task = $bindable(), startEditingTask} = $props();
 
     const remainingTasks = $derived(task.actualPomodoros - task.estimatedPomodoros);
-    const progressText = $derived(`${task.estimatedPomodoros} / ${task.actualPomodoros}`);
+    const progressText = $derived(`${task.actualPomodoros} / ${task.estimatedPomodoros}`);
     function toggle() {
         task.isCompleted = !task.isCompleted;
-    }
-    function update() {
-        
     }
 </script>
 
@@ -25,13 +23,13 @@
     <div class="flex gap-3 items-center mr-3">
         <input 
             onchange={toggle} 
-            id={"task-" + task.taskNumber}
+            id={"task-" + task.id}
             type="checkbox"
             checked={task.isCompleted}
             class="peer cursor-pointer accent-pinkish"/>
-        <label class="flex w-full peer-checked:line-through peer-checked:text-gray-400 cursor-pointer" for="task{task.taskNumber}">
+        <label class="flex w-full peer-checked:line-through peer-checked:text-gray-400 cursor-pointer" for="task{task.id}">
             <p class="overflow-x-clip">
-                {task.taskText}
+                {task.text}
             </p>
         </label>
     </div>
@@ -39,6 +37,7 @@
         <p class="text-gray-400">{progressText}</p>
 
         <button
+            onclick={()=>{startEditingTask(task.id)}}
             class="hover:bg-gray-200 p-1 rounded"
         >
             <FontAwesomeIcon 
@@ -47,4 +46,5 @@
         />
         </button>
     </div>
+    
 </div>
