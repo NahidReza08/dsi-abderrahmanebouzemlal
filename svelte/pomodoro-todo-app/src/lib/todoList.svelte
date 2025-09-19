@@ -161,7 +161,7 @@
 </script>
 
 <div class="absolute -translate-y-20 w-1/3 z-50 left-1/2 -translate-x-1/2 shadow-2xl text-black rounded">
-    <div class="bg-white text-center text-lg font-bold p-4 border-b border-gray-300">
+    <div class="bg-white text-center text-lg font-bold p-4 border-b border-gray-300 mb-5">
         <p>{ currentTask }</p>
     </div>
     
