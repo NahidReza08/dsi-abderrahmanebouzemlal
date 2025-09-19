@@ -4,7 +4,7 @@
     import { faPlus } from "@fortawesome/free-solid-svg-icons";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import TaskForm from "./taskForm.svelte";
-  import { list } from "postcss";
+    import { list } from "postcss";
 
     const NEW_TASK = {
         id: crypto.randomUUID(),
@@ -16,9 +16,10 @@
 
     let tasksList = $state([
         { id: 1, estimatedPomodoros: 4, actualPomodoros: 3, text: "Learn Svelte", isCompleted: false },
-        { id: 2, estimatedPomodoros: 5, actualPomodoros: 2, text: "Build Todo App", isCompleted: false}
+        { id: 2, estimatedPomodoros: 5, actualPomodoros: 2, text: "Build Todo App", isCompleted: false }
     ]);
 
+    let currentTask = $state("No task selected");
     let isCreating = $state(false);
     let currentFilter = $state('all');
     let editingTaskId = $state(null);
@@ -41,7 +42,7 @@
                 ? { ...task, estimatedPomodoros, isCompleted }
                 : task
         );
-        toggleTaskCreation(false); // Close modification mode
+        toggleTaskCreation(false);
         closeAllForms();
     }
 
@@ -63,7 +64,7 @@
 
     function toggleTaskCreation() {
         isCreating = !isCreating;
-        editingTaskId = null; // Close any editing forms
+        editingTaskId = null;
         
         if (!isCreating) {
             resetTaskForm();
@@ -160,19 +161,8 @@
 </script>
 
 <div class="absolute -translate-y-20 w-1/3 z-50 left-1/2 -translate-x-1/2 shadow-2xl text-black rounded">
-    <!-- Create Task Button -->
-    <div class="border-dashed border-2 group bg-white w-full mb-4 flex gap-2 py-1 justify-start items-center rounded-md hover:bg-gray-200 transition-colors duration-300">
-        <button
-            onclick={() => {toggleTaskCreation()}}
-            type="button"
-            class="w-full p-3 flex gap-3 text-slate-500 items-center hover:cursor-pointer"
-        >
-            <FontAwesomeIcon 
-                class="text-gray-400 w-6 hover:cursor-pointer group-hover:rotate-90 transition-transform duration-300" 
-                icon={faPlus}
-            />
-            Create a new todo...
-        </button>
+    <div class="bg-white text-center text-lg font-bold p-4 border-b border-gray-300">
+        <p>{ currentTask }</p>
     </div>
     
     <div>
@@ -180,6 +170,8 @@
             <!-- Tasks List - Fixed to pass all required props -->
             {#each filteredTasks as task, i (task.id)}
                 <NewTask
+                    bind:currentTask
+                    isModifying={editingTaskId === task.id}
                     {startEditingTask}
                     bind:task={filteredTasks[i]}
                 />
@@ -195,6 +187,20 @@
                 {deleteTask}
                 currentTask={editingTaskId ? tasksList.find(t => t.id === editingTaskId) : null}
             />
+            <!-- Create Task Button -->
+            <div class="border-dashed border-2 group bg-white w-full mb-4 flex gap-2 py-1 justify-start items-center rounded-md hover:bg-gray-200 transition-colors duration-300">
+                <button
+                    onclick={() => {toggleTaskCreation()}}
+                    type="button"
+                    class="w-full p-3 flex gap-3 text-slate-500 items-center hover:cursor-pointer"
+                >
+                    <FontAwesomeIcon 
+                        class="text-gray-400 w-6 hover:cursor-pointer group-hover:rotate-90 transition-transform duration-300" 
+                        icon={faPlus}
+                    />
+                    Create a new todo...
+                </button>
+            </div>
             {#if tasksList.length > 0}
             <!-- Footer - Fixed to use computed values and working filter buttons -->
                 <div class="bg-white flex justify-between items-center p-3 text-sm text-gray-400 border-t border-gray-300">

@@ -2,10 +2,10 @@
 // @ts-nocheck
     import { faPlus } from "@fortawesome/free-solid-svg-icons";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    let { isCreating, deleteTask, handleFormSubmit, handleTaskUpdate, isModifying, newTaskForm, toggleTaskVisibility} = $props();
+    let { isCreating, deleteTask, handleFormSubmit, handleTaskUpdate, isModifying=$bindable(), newTaskForm, toggleTaskVisibility, isEditing} = $props();
 </script>
 <form 
-    class="{(isCreating || isModifying) ? 'block' : 'hidden'} absolute -translate-y-20 z-50 left-1/2 -translate-x-1/2 bg-white border-b border-l-white border-l-4 border-gray-300 w-full p-3 flex flex-col gap-3 hover:cursor-pointer hover:border-l-4 hover:border-l-gray-300 focus-within:border-l-4"
+    class="{(isCreating || isModifying) ? 'block' : 'hidden'} bg-white border-b border-l-white border-l-4 border-gray-300 w-full p-3 flex flex-col gap-3 hover:cursor-pointer hover:border-l-4 hover:border-l-gray-300 focus-within:border-l-4"
     onsubmit={handleFormSubmit}
 >
     <!-- Task Text Input -->
@@ -61,7 +61,7 @@
         <div>
             <button 
                 type="button"
-                onclick={toggleTaskVisibility}
+                onclick={()=>{toggleTaskVisibility(); isEditing = false;}}
                 class="bg-white hover:cursor-pointer hover:bg-gray-200 px-3 py-2 rounded border"
             >
                 Cancel

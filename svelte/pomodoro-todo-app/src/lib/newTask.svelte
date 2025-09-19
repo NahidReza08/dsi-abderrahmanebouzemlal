@@ -6,7 +6,7 @@
     // iLmport { creaLteEventDispatcher } from 'svelte';
     // const dispatch = createEventDispatcher();
 
-    let {task = $bindable(), startEditingTask} = $props();
+    let {task = $bindable(), startEditingTask,isModifying, currentTask = $bindable()} = $props();
 
     const remainingTasks = $derived(task.actualPomodoros - task.estimatedPomodoros);
     const progressText = $derived(`${task.actualPomodoros} / ${task.estimatedPomodoros}`);
@@ -18,7 +18,8 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div 
-    class="bg-white border-b border-l-white border-l-4 border-gray-300 w-full p-3 flex justify-between items-center hover:cursor-pointer hover:border-l-4 hover:border-l-gray-300 focus-within:border-l-4 "
+    onclick={() => {currentTask = task.text}}
+    class="{isModifying ? 'hidden':'block'} bg-white border-b border-l-white border-l-4 border-gray-300 w-full p-3 flex justify-between items-center hover:cursor-pointer hover:border-l-4 hover:border-l-gray-300 {task.text === currentTask ? 'border-l-4 border-l-pinkish bg-green-600': ''}"
 >
     <div class="flex gap-3 items-center mr-3">
         <input 
