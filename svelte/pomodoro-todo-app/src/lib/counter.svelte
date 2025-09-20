@@ -4,6 +4,7 @@
     import { derived } from "svelte/store";
     import { faForward } from "@fortawesome/free-solid-svg-icons";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+    import { timerAction } from "../actions/actions.svelte";
 
     let timerMinutes = $state(25);
     let timerSeconds = $state(0);

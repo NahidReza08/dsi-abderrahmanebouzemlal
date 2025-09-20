@@ -3,8 +3,26 @@
     import { faPlus } from "@fortawesome/free-solid-svg-icons";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     let { isCreating, deleteTask, handleFormSubmit, handleTaskUpdate, isModifying=$bindable(), newTaskForm, toggleTaskVisibility, isEditing} = $props();
+    function clickOutside(element){
+        function handleClick(event) {
+            const targetEl = event.target;
+
+            if (element && !element.contains(targetEl)) {
+                toggleTaskVisibility(); isEditing = false;
+            }
+        }
+        document.addEventListener('click', handleClick, true);
+
+
+        return {
+            destroy() {
+                document.removeEventListener('click', handleClick, true);
+            }
+        };
+    }
 </script>
 <form 
+    use:clickOutside
     class="{(isCreating || isModifying) ? 'block' : 'hidden'} bg-white border-b border-l-white border-l-4 border-gray-300 w-full p-3 flex flex-col gap-3 hover:cursor-pointer hover:border-l-4 hover:border-l-gray-300 focus-within:border-l-4"
     onsubmit={handleFormSubmit}
 >

@@ -22,7 +22,6 @@
             }
         }, 1000);
         
-        // Cleanup function - runs when effect re-runs or component unmounts
         return () => clearInterval(interval);
     });
 </script>
