@@ -1,7 +1,3 @@
-Here’s a **5-month learning plan** (4 months structured study + 1 month final project) based on your chosen tech stack. The weeks have been compressed slightly while keeping a day-by-day structure.
-
----
-
 ## **Phase 1: Tailwind + Svelte (Weeks 1–4)**
 
 **Goal:** Learn modern frontend basics and component-driven UI.
