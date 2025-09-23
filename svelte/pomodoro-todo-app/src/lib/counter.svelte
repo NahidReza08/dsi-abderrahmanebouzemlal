@@ -1,57 +1,106 @@
 <script>
-// @ts-nocheck
-    import Timer from "./timer.svelte";
-    import { derived } from "svelte/store";
-    import { faForward } from "@fortawesome/free-solid-svg-icons";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { timerAction } from "../actions/actions.svelte";
+    import { faForward } from "@fortawesome/free-solid-svg-icons";
+    import { getTimerStore,getSessionStore } from "./stores.svelte";
+    import { timerActions  } from "../actions/actions.svelte";
 
-    let timerMinutes = $state(25);
-    let timerSeconds = $state(0);
-    let isRunning = $state(false);
-    let currentMode = $state('pomodoro');
+    let timerActionsInstance;
 
-    const modes = $derived.by( () => {
-        switch(currentMode) {
-            case 'pomodoro': return { label: 'Pomodoro', minutes: 25 };
-            case 'shortBreak': return { label: 'Short Break', minutes: 5 };
-            case 'longBreak': return { label: 'Long Break', minutes: 15 };
-            default: return { label: 'Pomodoro', minutes: 25 };
+    const timerStore = getTimerStore();
+    const sessionStore = getSessionStore();
+
+    const timerState = $derived(timerStore.value);
+    const sessionState = $derived(sessionStore.value); 
+
+    function hundleTimerComplete() {
+        if (timerState.currentMode === 'pomodoro') {
+            sessionStore.completePomodoro();
+            if (sessionState.actualPomodoros % 4 === 0) {
+                timerStore.setMode('longBreak');
+            } else {
+            timerStore.setMode('shortBreak');
+            }
+        } else {
+            timerStore.setMode('pomodoro')
+        }
+        timerActionsInstance?.reset();
     }
-    });
-    function setMode(mode) {
-        currentMode = mode;
-        timerMinutes = modes.minutes;
-        timerSeconds = 0;
-        isRunning = false;
+    
+    function handleTimerTick(timerState) {
+        console.log('Tick:', timerState);
     }
-
 </script>
-<div class="bg-light-desktop bg-cover p-28 flex justify-center font-medium">
-    <div class="flex flex-col justify-center items-center w-fit text-white gap-8">
+
+<div class="bg-light-desktop bg-cover p-28 flex justify-center font-medium" data-timer-actions>
+    <div class="flex flex-col justify-center items-center w-fit text-white gap-8 ">
         <div class="flex justify-between gap-5">
-            <button onclick={() => {setMode("pomodoro")}} class="hover:cursor-pointer focus:bg-purple-600 focus:font-bold py-1 px-2 rounded-lg">Pomodoro</button>
-            <button onclick={() => {setMode("shortBreak")}} class="hover:cursor-pointer focus:bg-purple-600 focus:font-bold py-1 px-2 rounded-lg">Short Break</button>
-            <button onclick={() => {setMode("longBreak")}} class="hover:cursor-pointer focus:bg-purple-600 focus:font-bold py-1 px-2 rounded-lg">Long Break</button>
-        </div>
-        <Timer bind:timerMinutes bind:timerSeconds bind:isRunning/>
-        <div class="flex justify-center items-center gap-4">
-            <button
-                onclick={() => {
-                    isRunning = !isRunning;
-                    let audio = new Audio("/home/abdou/side_projects/dsi-abderrahmanebouzemlal/svelte/pomodoro-todo-app/src/assets/mouse-click-290204.mp3");
-                    audio.play();
-                }} 
-                class="bg-white text-purple-light font-bold text-2xl py-2 px-6 hover:cursor-pointer">
-                {isRunning ? "PAUSE" : "START" }
-            </button>
-            {#if (isRunning)}
-                <button 
-                    class="bg-white text-purple-light font-bold text-2xl py-2 px-6 ml-4 hover:cursor-pointer" 
-                    onclick={() => {isRunning = false; timerMinutes = modes.minutes; timerSeconds = 0;}}>
-                    <FontAwesomeIcon icon={faForward}/>
-                </button>
-            {/if}
-        </div>
+            <button 
+                onclick={() => timerStore.setMode('pomodoro')} 
+                class="hover:cursor-pointer hover:bg-purple-500 {timerState.currentMode === 'pomodoro' ? 'bg-purple-700 font-bold' : ''} py-2 px-4 rounded-lg transition-colors"
+            >
+            Pomodoro
+        </button>
+        <button 
+            onclick={() => timerStore.setMode('shortBreak')} 
+            class="hover:cursor-pointer hover:bg-purple-500 {timerState.currentMode === 'shortBreak' ? 'bg-purple-700 font-bold' : ''} py-2 px-4 rounded-lg transition-colors"
+        >
+            Short Break
+        </button>
+        <button 
+            onclick={() => timerStore.setMode('longBreak')} 
+            class="hover:cursor-pointer hover:bg-purple-500 {timerState.currentMode === 'longBreak' ? 'bg-purple-700 font-bold' : ''} py-2 px-4 rounded-lg transition-colors"
+        >
+            Long Break
+        </button>
     </div>
+    
+    <div class="my-8" 
+         use:timerActions={{
+            onComplete: hundleTimerComplete,
+            onTick: handleTimerTick
+         }}
+         bind:this={timerActionsInstance}>
+         
+        <span class="text-8xl font-extrabold text-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            {timerState.minutes.toString().padStart(2, '0')}:
+            {timerState.seconds.toString().padStart(2, '0')}
+        </span>
+    </div>
+    <!-- timerActionsInstance will have .action property with start/stop/reset methods -->
+    <div class="flex justify-center items-center gap-4">
+      <button
+        onclick={() => {
+          if (timerState.isRunning) {
+            timerActionsInstance?.stop();
+          } else {
+            timerActionsInstance?.start();
+          }
+        }}
+        class="bg-white text-purple-600 font-bold text-2xl py-3 px-8 rounded-lg hover:cursor-pointer hover:bg-gray-100 transition-colors"
+      >
+        {timerState.isRunning ? "PAUSE" : "START"}
+      </button>
+      
+      <button
+        onclick={() => timerActionsInstance?.reset()}
+        class="bg-white text-purple-600 font-bold text-xl py-3 px-6 rounded-lg hover:cursor-pointer hover:bg-gray-100 transition-colors"
+      >
+        Reset
+      </button>
+      
+      {#if timerState.isRunning}
+        <button
+          onclick={hundleTimerComplete}
+          class="bg-white text-purple-600 font-bold text-xl py-3 px-6 rounded-lg hover:cursor-pointer hover:bg-gray-100 transition-colors"
+        >
+          <FontAwesomeIcon icon={faForward}/>
+        </button>
+      {/if}
+    </div>
+    
+    <div class="text-center text-sm opacity-75">
+        <h2>{timerState.currentMode}</h2>
+        <p>Completed Pomodoros: {sessionState.actualPomodoros}</p>
+    </div>
+  </div>
 </div>
