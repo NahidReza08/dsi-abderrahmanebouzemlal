@@ -39,16 +39,6 @@
     </div>
     
     <div class="flex items-center justify-between">
-      <div class="flex items-center space-x-4 text-sm text-gray-400">
-        <div class="flex items-center">
-          {@html icons.star}
-          <span class="ml-1">{project.stars}</span>
-        </div>
-        <div class="flex items-center">
-          {@html icons.users}
-          <span class="ml-1">{project.contributors}</span>
-        </div>
-      </div>
       <div class="flex space-x-2">
         <button class="p-2 glass bg-white/20 text-white rounded-lg hover:bg-white/30 transition-all duration-200 hover:scale-110" onclick={() => window.open(project.github)}>
           {@html icons.github}
