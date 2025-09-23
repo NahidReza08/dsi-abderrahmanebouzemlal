@@ -1,40 +1,123 @@
-// @ts-ignore
-export function timerAction(element, {start, pause, reset, isRunningStore, minutesStore, secondsStore}) {
-    const handleStartPomodoro = () => start();
-    const handlePause = () => pause();
-    const handlenext = () => reset();
-    const handleReset = () => reset();
-    isRunningStore.subscribe(value => isRunning = value);
-    minutesStore.subscribe(value => timerMinutes = value);
-    secondsStore.subscribe(value => timerSeconds = value);
-    
-    let isRunning = false;
-    let timerMinutes = 0;
-    let timerSeconds = 0;
+// @ts-nocheck
+import { getTimerStore, getSessionStore } from '../lib/stores.svelte.js';
 
-    element.addEventListener('start', handleStartPomodoro);
-    element.addEventListener('pause', handlePause);
-    element.addEventListener('next', handlenext);
-    element.addEventListener('reset', handleReset);
+
+export function timerActions(node, options = {}) {
+    const timerStore = getTimerStore();
+    const sessionStore = getSessionStore();
     
-    $effect(() => {
-        if (!isRunning) return;
+    let timerId = null;
+    
+    const {
+        onComplete = () => {},
+        onTick = () => {},
+        autoStart = false
+    } = options;
+    
+    function start() {
+        if (timerStore.value.isRunning || timerId) return;
         
-        const interval = setInterval(() => {
-            if (timerSeconds === 0) {
-                if (timerMinutes === 0) {
-                    clearInterval(interval);
-                    isRunning = false;
-                    element.dispatchEvent(new CustomEvent('next')); 
-                } else {
-                    timerMinutes -= 1;
-                    timerSeconds = 59;
+        timerStore.setRunning(true);
+        
+        timerId = setInterval(() => {
+            const result = timerStore.tick();
+            
+            onTick(timerStore.value);
+            
+            if (result === 'completed') {
+                stop();
+                onComplete(timerStore.value);
+                
+                if (timerStore.value.currentMode === 'Pomodoro') {
+                    sessionStore.completePomodoro();
                 }
-            } else {
-                timerSeconds -= 1;
             }
         }, 1000);
+    }
+    
+    function stop() {
+        timerStore.setRunning(false);
+        if (timerId) {
+            clearInterval(timerId);
+            timerId = null;
+        }
+    }
+    
+    function reset() {
+        stop();
+        const modeSettings = {
+            'pomodoro': 25,
+            'shortBreak': 5,
+            'longBreak': 15
+        };
+
+        const minutes = modeSettings[timerStore.value.currentMode] || 25;
+        timerStore.setTime(minutes, 0);
+    }
+    
+    function setMode(mode) {
+        stop();
+        timerStore.setMode(mode);
+        reset();
+    }
+    
+    function setCustomTime(minutes, seconds = 0) {
+        stop();
+        timerStore.setTime(minutes, seconds);
+    }
+    
+    if (autoStart) {
+        start();
+    }
+    const actionInstance = {
+        start,
+        stop,
+        reset,
+        setMode,
+        setCustomTime
+    };
+
+    Object.assign(node, actionInstance);
+
+    return {
+
+
+        update(newOptions) {
+            Object.assign(options, newOptions);
+        },
+        destroy() {
+            stop();
+        }
+    };
+}
+
+export function modeSwitcherAction(node, modes) {
+    const timerStore = getTimerStore();
+    
+    function switchToMode(mode) {
+        if (timerStore.value.isRunning) {
+            if (!confirm('Timer is running. Switch mode anyway?')) {
+                return;
+            }
+        }
         
-        return () => clearInterval(interval);
+        const timerActions = node.closest('[data-timer-actions]')?._timerActions;
+        if (timerActions) {
+            timerActions.setMode(mode);
+        }
+    }
+    
+    const buttons = node.querySelectorAll('[data-mode]');
+    buttons.forEach(button => {
+        const mode = button.dataset.mode;
+        button.addEventListener('click', () => switchToMode(mode));
     });
+    
+    return {
+        destroy() {
+            buttons.forEach(button => {
+                button.removeEventListener('click', () => switchToMode(mode));
+            });
+        }
+    };
 }

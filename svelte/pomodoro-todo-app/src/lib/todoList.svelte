@@ -5,33 +5,63 @@
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import TaskForm from "./taskForm.svelte";
     import { list } from "postcss";
+    import { getTimerStore, getSessionStore } from "./stores.svelte";
+
 
     const NEW_TASK = {
-        id: crypto.randomUUID(),
+        id: '',
         estimatedPomodoros: 1,
         actualPomodoros: 0,
-        text: "New Task",
+        title: '',
         isCompleted: false
     };
 
     let tasksList = $state([
-        { id: 1, estimatedPomodoros: 4, actualPomodoros: 3, text: "Learn Svelte", isCompleted: false },
-        { id: 2, estimatedPomodoros: 5, actualPomodoros: 2, text: "Build Todo App", isCompleted: false }
+        {
+            id: crypto.randomUUID(),
+            estimatedPomodoros: 4,
+            actualPomodoros: 2,
+            title: "Learn Svelte",
+            isCompleted: false
+        },
+        {
+            id: crypto.randomUUID(),
+            estimatedPomodoros: 3,
+            actualPomodoros: 1,
+            title: "Build a Todo App",
+            isCompleted: true
+        },
+        {
+            id: crypto.randomUUID(),
+            estimatedPomodoros: 5,
+            actualPomodoros: 0,
+            title: "Read a Book",
+            isCompleted: false
+        }
     ]);
 
-    let currentTask = $state("No task selected");
+    let selectedTaskObject = $state(null);
     let isCreating = $state(false);
     let currentFilter = $state('all');
     let editingTaskId = $state(null);
 
     let newTaskForm = $state({
-        text: '',
+        title: '',
         actualPomodoros: 0, 
         estimatedPomodoros: 1,
     });
 
     const activeTasks = $derived(tasksList.filter(task => !task.isCompleted));
     const completedTasks = $derived(tasksList.filter(task => task.isCompleted));
+
+    const sessionStore = $state(getSessionStore());
+
+    const sessionState = $derived(sessionStore.value); 
+
+
+    function handleTaskSelect(task) {
+        sessionStore.setTask(task);
+    }
 
     function handleTaskUpdate(event) {
         event.preventDefault();
@@ -82,14 +112,14 @@
         if (task) {
             editingTaskId = taskId;
             isCreating = false;
-            newTaskForm.text = task.text;
+            newTaskForm.title = task.title;
             newTaskForm.actualPomodoros = task.actualPomodoros;
             newTaskForm.estimatedPomodoros = task.estimatedPomodoros;
         }
     }
 
     function resetTaskForm() {
-        newTaskForm.text = '';
+        newTaskForm.title = '';
         newTaskForm.estimatedPomodoros = 1;
         newTaskForm.actualPomodoros = 0;
     }
@@ -100,7 +130,7 @@
         resetTaskForm();
     }
     function saveEditedTask() {
-        const trimmedText = newTaskForm.text.trim();
+        const trimmedText = newTaskForm.title.trim();
         if (!trimmedText || !editingTaskId) {
             return;
         }
@@ -109,7 +139,7 @@
             task.id === editingTaskId 
                 ? { 
                     ...task, 
-                    text: trimmedText,
+                    title: trimmedText,
                     actualPomodoros: newTaskForm.actualPomodoros,
                     estimatedPomodoros: newTaskForm.estimatedPomodoros
                 }
@@ -119,14 +149,14 @@
         closeAllForms();
     }
     function saveNewTask() {
-        const trimmedText = newTaskForm.text.trim();
+        const trimmedText = newTaskForm.title.trim();
             if (!trimmedText) {
                 return;
         }
         
         const newTask = {
             ...NEW_TASK,
-            text: trimmedText,
+            title: trimmedText,
             actualPomodoros: newTaskForm.actualPomodoros,
             estimatedPomodoros: newTaskForm.estimatedPomodoros,
             id: crypto.randomUUID()
@@ -145,6 +175,13 @@
     }
 
     function deleteTask (task) {
+        if (!task || !task.id) return;
+        if (editingTaskId === task.id) {
+            closeAllForms();
+        }
+        if (sessionState.title === task.title) {
+            sessionState.clearTask();
+        }
         let index = tasksList.findIndex(t => t.id === task.id);
         tasksList.splice(index, 1);
         closeAllForms();
@@ -161,19 +198,26 @@
 </script>
 
 <div class="absolute -translate-y-20 w-1/3 z-50 left-1/2 -translate-x-1/2 shadow-2xl text-black rounded">
-    <div class="bg-white text-center text-lg font-bold p-4 border-b border-gray-300 mb-5">
-        <p>{ currentTask }</p>
-    </div>
+    {#if sessionState.id}
+        <div class="bg-white text-center text-lg font-bold p-4 border-b border-gray-300 mb-5">
+            <p>{ sessionState.title }</p>
+            {#if sessionState.estimatedPomodoros > 0}
+            <p class="text-xs text-blue-500 mt-1">
+            Progress: {sessionState.actualPomodoros}/{sessionState.estimatedPomodoros} Pomodoros
+            </p>
+        {/if}
+        </div>
+    {/if}
     
     <div>
         <div class="flex flex-col">
             <!-- Tasks List - Fixed to pass all required props -->
             {#each filteredTasks as task, i (task.id)}
                 <NewTask
-                    bind:currentTask
                     isModifying={editingTaskId === task.id}
                     {startEditingTask}
                     bind:task={filteredTasks[i]}
+                    onTaskSelect={handleTaskSelect}
                 />
             {/each}
             
