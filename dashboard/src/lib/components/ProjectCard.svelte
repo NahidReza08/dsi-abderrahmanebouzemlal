@@ -39,6 +39,7 @@
     </div>
     
     <div class="flex items-center justify-between">
+<<<<<<< HEAD
       <div class="flex items-center space-x-4 text-sm text-gray-400">
         <div class="flex items-center">
           {@html icons.star}
@@ -49,6 +50,8 @@
           <span class="ml-1">{project.contributors}</span>
         </div>
       </div>
+=======
+>>>>>>> main
       <div class="flex space-x-2">
         <button class="p-2 glass bg-white/20 text-white rounded-lg hover:bg-white/30 transition-all duration-200 hover:scale-110" onclick={() => window.open(project.github)}>
           {@html icons.github}
