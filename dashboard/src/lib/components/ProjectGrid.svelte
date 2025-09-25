@@ -1,8 +1,7 @@
 <script>
   import { icons } from '../utils/icons.js';
   import { projects } from '../data/projects.js';
-  import ProjectCard from './ProjectCard.svelte';
-  
+  import ProjectCard from './ProjectCard.svelte';  
 </script>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

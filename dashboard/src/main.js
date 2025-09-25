@@ -1,4 +1,5 @@
 import { mount } from 'svelte'
+// @ts-ignore
 import './app.css'
 import App from './App.svelte'
 
