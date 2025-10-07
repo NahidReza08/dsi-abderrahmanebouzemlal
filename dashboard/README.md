@@ -17,15 +17,15 @@ This is a dashboard application built using Svelte and Vite. It serves as a cent
 3. Install the dependencies:
  ```bash
     npm install
-    ```
+ ```
 4. Start the development server:
  ```bash
     npm run dev
-    ```
+  ```
 5. Open your browser and visit `http://localhost:5173` to view the dashboard.
 ## Building for Production
 To create a production build of the dashboard, run:
-    ```bash
-        npm run build
-        ```
+```bash
+npm run build
+```
 The build files will be generated in the `dist` directory.
