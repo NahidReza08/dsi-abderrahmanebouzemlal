@@ -4,3 +4,12 @@
 [submodule "svelte/pomodoro-timer-app"]
 	path = svelte/pomodoro-timer-app
 	url = https://github.com/AbderrahmaneBouzemlal/pomodoro-timer-app
+[submodule "tailwindcss/fylo-dark-theme-landing-page-master"]
+	path = tailwindcss/fylo-dark-theme-landing-page-master
+	url = https://github.com/AbderrahmaneBouzemlal/fylo-landing-page
+[submodule "tailwindcss/testimonials-grid-section-main"]
+	path = tailwindcss/testimonials-grid-section-main
+	url = https://github.com/AbderrahmaneBouzemlal/testimonials-grid-section-main
+[submodule "tailwindcss/digitalbank-landing-page-master"]
+	path = tailwindcss/digitalbank-landing-page-master
+	url = https://github.com/AbderrahmaneBouzemlal/digitalbank-landing-page
