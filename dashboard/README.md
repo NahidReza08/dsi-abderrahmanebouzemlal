@@ -9,7 +9,7 @@ This is a dashboard application built using Svelte and Vite. It serves as a cent
 - **Vite**: A fast build tool and development server.
 ## Getting Started
 ### Prerequisites
-- Node.js (version 14 or higher)
+- Node.js (version 20 or higher)
 - npm (version 6 or higher)
 ### Installation
 1. Clone the repository:
