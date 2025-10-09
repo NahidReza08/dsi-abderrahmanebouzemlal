@@ -13,3 +13,6 @@
 [submodule "tailwindcss/digitalbank-landing-page-master"]
 	path = tailwindcss/digitalbank-landing-page-master
 	url = https://github.com/AbderrahmaneBouzemlal/digitalbank-landing-page
+[submodule "nodejs/notes-cli"]
+	path = nodejs/notes-cli
+	url = https://github.com/AbderrahmaneBouzemlal/notes-cli
