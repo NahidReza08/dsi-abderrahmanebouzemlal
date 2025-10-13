@@ -1,6 +1,3 @@
-[submodule "svelte/poll-app"]
-	path = svelte/poll-app
-	url = https://github.com/AbderrahmaneBouzemlal/poll-app
 [submodule "svelte/pomodoro-timer-app"]
 	path = svelte/pomodoro-timer-app
 	url = https://github.com/AbderrahmaneBouzemlal/pomodoro-timer-app
