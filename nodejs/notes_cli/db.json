@@ -1,0 +1,223 @@
+{
+  "notes": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "title": "Project Kickoff Meeting",
+      "content": "Discussed project timeline and deliverables. Team agreed on sprint schedule. Next meeting scheduled for Friday at 2 PM. Action items: Update project board, send calendar invites, prepare sprint backlog.",
+      "tags": [
+        "work",
+        "meeting",
+        "urgent"
+      ],
+      "createdAt": 1704067200000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440002",
+      "title": "Shopping List",
+      "content": "Milk (2 gallons), Eggs (dozen), Bread, Chicken breast, Vegetables (broccoli, carrots, spinach), Pasta, Tomato sauce, Coffee beans, Olive oil",
+      "tags": [
+        "personal",
+        "shopping"
+      ],
+      "createdAt": 1704153600000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440003",
+      "title": "JavaScript Array Methods",
+      "content": "map() - transforms array elements, filter() - selects elements based on condition, reduce() - reduces array to single value, forEach() - iterates over array, find() - returns first matching element, some() - checks if any element matches, every() - checks if all elements match",
+      "tags": [
+        "programming",
+        "javascript",
+        "reference"
+      ],
+      "createdAt": 1704240000000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440004",
+      "title": "Book Ideas",
+      "content": "1. The Midnight Garden - Mystery novel about a secret garden that only appears at night. 2. Code & Coffee - Tech startup story with romance subplot. 3. The Last Algorithm - Sci-fi about AI consciousness. 4. Wandering Stars - Fantasy adventure across magical realms.",
+      "tags": [
+        "creative",
+        "writing",
+        "ideas"
+      ],
+      "createdAt": 1704326400000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440005",
+      "title": "Workout Routine",
+      "content": "Monday: Chest & Triceps (Bench press 3x10, Pushups 3x15, Dips 3x12), Wednesday: Back & Biceps (Pull-ups 3x8, Rows 3x10, Curls 3x12), Friday: Legs & Shoulders (Squats 3x10, Lunges 3x12, Shoulder press 3x10), Daily: 20 min cardio, 10 min stretching",
+      "tags": [
+        "health",
+        "fitness",
+        "personal"
+      ],
+      "createdAt": 1704412800000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440006",
+      "title": "Client Feedback Summary",
+      "content": "Overall positive response to new design. Requested changes: darker color scheme, larger fonts, simplified navigation menu. Likes: loading speed, responsive layout, intuitive interface. Timeline: implement changes by end of week, schedule follow-up demo.",
+      "tags": [
+        "work",
+        "client",
+        "feedback"
+      ],
+      "createdAt": 1704499200000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440007",
+      "title": "Travel Plans - Tokyo",
+      "content": "Flight: Dec 15-22. Hotels: Shibuya (3 nights), Kyoto (2 nights), Osaka (2 nights). Must visit: Senso-ji Temple, Fushimi Inari, Osaka Castle, Tsukiji Market, Akihabara. Try: Ramen, Sushi, Takoyaki, Matcha desserts. Book JR Pass before departure.",
+      "tags": [
+        "travel",
+        "personal",
+        "planning"
+      ],
+      "createdAt": 1704585600000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440008",
+      "title": "Bug Fixes - Sprint 12",
+      "content": "Fixed: Login authentication timeout, CSS layout issue on mobile, API rate limiting error, Image upload compression. In Progress: Database query optimization, Memory leak in background worker. Testing: New caching mechanism, Payment gateway integration.",
+      "tags": [
+        "work",
+        "programming",
+        "bugs"
+      ],
+      "createdAt": 1704672000000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440009",
+      "title": "Recipe - Grandma's Cookies",
+      "content": "Ingredients: 2 cups flour, 1 cup butter, 1 cup sugar, 2 eggs, 1 tsp vanilla, 1 tsp baking soda, chocolate chips. Instructions: Cream butter and sugar, add eggs and vanilla, mix dry ingredients, fold in chips, bake at 350°F for 12 minutes. Makes 24 cookies.",
+      "tags": [
+        "personal",
+        "recipe",
+        "cooking"
+      ],
+      "createdAt": 1704758400000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440010",
+      "title": "Learning Goals 2024",
+      "content": "Technical: Master React Native, Learn Rust, Complete AWS certification, Build 3 side projects. Personal: Read 24 books, Run a half marathon, Learn basic Japanese, Start investing. Career: Get promoted to senior role, Mentor junior developers, Speak at tech conference.",
+      "tags": [
+        "goals",
+        "personal",
+        "career"
+      ],
+      "createdAt": 1704844800000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440011",
+      "title": "Meeting Notes - Q1 Planning",
+      "content": "Objectives: Increase user engagement 25%, Reduce churn rate by 10%, Launch mobile app beta. Budget: $50K for marketing, $30K for infrastructure, $20K contingency. Team expansion: 2 developers, 1 designer. Risk mitigation: weekly check-ins, monthly reviews.",
+      "tags": [
+        "work",
+        "meeting",
+        "planning"
+      ],
+      "createdAt": 1704931200000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440012",
+      "title": "Git Commands Cheatsheet",
+      "content": "git init - initialize repo, git clone - copy repo, git add . - stage all, git commit -m - save changes, git push - upload to remote, git pull - download from remote, git branch - list/create branches, git checkout - switch branches, git merge - combine branches, git status - check changes",
+      "tags": [
+        "programming",
+        "git",
+        "reference"
+      ],
+      "createdAt": 1705017600000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440013",
+      "title": "Weekend Getaway Ideas",
+      "content": "Option 1: Beach house in Santa Cruz - surfing, seafood, bonfire. Option 2: Cabin in Tahoe - hiking, lake activities, stargazing. Option 3: Wine country in Napa - tastings, fine dining, spa day. Option 4: City break in Seattle - museums, Pike Place, coffee tours. Budget: $500-800 per person.",
+      "tags": [
+        "personal",
+        "travel",
+        "ideas"
+      ],
+      "createdAt": 1705104000000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440014",
+      "title": "Podcast Episode Ideas",
+      "content": "Ep 15: Remote work productivity tips. Ep 16: Interview with startup founder. Ep 17: Mental health in tech industry. Ep 18: Career transitions and reinvention. Ep 19: Building side projects while employed. Ep 20: The future of AI in software development. Guest wish list: update contact info.",
+      "tags": [
+        "creative",
+        "podcast",
+        "ideas"
+      ],
+      "createdAt": 1705190400000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440015",
+      "title": "Home Improvement Tasks",
+      "content": "Urgent: Fix leaky bathroom faucet, Replace air filter, Clean gutters. This month: Paint bedroom walls, Install new light fixtures, Organize garage. Long term: Renovate kitchen, Add deck in backyard, Upgrade HVAC system. Get quotes from 3 contractors.",
+      "tags": [
+        "personal",
+        "home",
+        "tasks"
+      ],
+      "createdAt": 1705276800000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440016",
+      "title": "API Documentation Notes",
+      "content": "Authentication: JWT tokens, refresh every 24 hours. Endpoints: /api/users (GET, POST, PUT, DELETE), /api/posts (GET, POST, PUT, DELETE). Rate limits: 1000 requests/hour. Error codes: 400 bad request, 401 unauthorized, 404 not found, 500 server error. Version: v2.1.0",
+      "tags": [
+        "work",
+        "programming",
+        "documentation"
+      ],
+      "createdAt": 1705363200000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440017",
+      "title": "Birthday Party Planning",
+      "content": "Date: March 15, 3 PM. Venue: Community center (reserved). Guest list: 30 people. Food: Pizza, salad, cake from Sweet Bakery. Activities: Board games, karaoke, photo booth. Decorations: Balloons, banners, string lights. Budget: $600. Send invitations by Feb 15.",
+      "tags": [
+        "personal",
+        "event",
+        "planning"
+      ],
+      "createdAt": 1705449600000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440018",
+      "title": "Docker Commands Reference",
+      "content": "docker build - create image, docker run - start container, docker ps - list running containers, docker stop - stop container, docker rm - remove container, docker images - list images, docker pull - download image, docker-compose up - start services, docker logs - view container logs",
+      "tags": [
+        "programming",
+        "docker",
+        "reference"
+      ],
+      "createdAt": 1705536000000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440019",
+      "title": "Investment Research Notes",
+      "content": "Index Funds: VTSAX (total market), VTI (similar to VTSAX), VOO (S&P 500). Tech stocks: AAPL, MSFT, GOOGL showing strong growth. Bonds: Consider BND for stability. Strategy: 70% stocks, 20% bonds, 10% cash. Max out 401k and Roth IRA. Rebalance quarterly. Emergency fund: maintain 6 months expenses.",
+      "tags": [
+        "personal",
+        "finance",
+        "research"
+      ],
+      "createdAt": 1705622400000
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440020",
+      "title": "Performance Optimization Ideas",
+      "content": "Frontend: Lazy load images, implement code splitting, minimize bundle size, use CDN for static assets, enable gzip compression. Backend: Add Redis caching, optimize database queries, implement connection pooling, use pagination for large datasets. Monitoring: Set up APM, track core web vitals, monitor error rates.",
+      "tags": [
+        "work",
+        "programming",
+        "optimization"
+      ],
+      "createdAt": 1705708800000
+    }
+  ]
+}
