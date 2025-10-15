@@ -71,7 +71,7 @@ const pollStore = writable([
   {
     id: uuidv4(),
     question: 'What is your favorite programming language?',
-    type: 'single',
+    type: 'multiple',
     options: [
       { id: 1, text: 'JavaScript', votes: 10 },
       { id: 2, text: 'Python', votes: 15 },

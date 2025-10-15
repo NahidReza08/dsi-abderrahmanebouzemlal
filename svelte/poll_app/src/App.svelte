@@ -75,10 +75,19 @@
     addingPoll = false;
   }
   function gettext(poll) {
-    const optionId = pollActions.getUserVote(poll.id)
-    const option = poll.options.find(o => o.id === optionId);
-    console.log(option.text);
-    return option ? option.text : '';
+    const optionIds = pollActions.getUserVote(poll.id)
+    if (!optionIds) return "";
+    let options = [];
+    if (Array.isArray(optionIds)) {
+        console.log("optionIds is not an array:", optionIds);
+        for (const id of optionIds) {
+            const option = poll.options.find(o => o.id === id);
+            if (option) options.push(option);
+        }
+    } else {
+        options = poll.options.find(o => o.id === optionIds);
+    }
+    return Array.isArray(options) ? options.map(o => o.text).join(", ") : options.text;
   }
 </script>
 
