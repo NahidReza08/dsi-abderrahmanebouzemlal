@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@layer utilities {
+  .bg-mockup-desktop {
+    background-image: url("/images/image-mockups.png");
+  }
+  .bg-mockup-mobile {
+    background-image: url("/images/image-mockups-mobile.png");
+  }
+  .bg-hero-pattern {
+    background-image: url("/images/bg-intro-desktop.svg");
+  }
+  .bg-hero-pattern-mobile {
+    background-image: url("/images/bg-intro-mobile.svg");
+  }
+}

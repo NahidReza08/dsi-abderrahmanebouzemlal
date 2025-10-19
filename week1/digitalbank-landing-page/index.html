@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <title>Frontend Mentor | Digitalbank landing page</title>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body class="font-sans text-Gray-50 line-height[1.5] overflow-x-hidden">
+    <header
+      class="shadow-md text-grey-50 top-0 left-0 w-full flex items-center justify-between py-8 px-8 md:px-16 lg:px-32 z-50 bg-white"
+    >
+      <img
+        class="pb-5 cursor-pointer"
+        src="/images/logo-dark.svg"
+        alt="logo"
+      /><input type="checkbox" id="menu-toggle" class="hidden peer" /><label
+        for="menu-toggle"
+        class="cursor-pointer md:hidden lg:hidden block peer-checked:hidden"
+        ><img src="/images/icon-hamburger.svg" alt="menu" /></label
+      ><label
+        for="menu-toggle"
+        class="cursor-pointer md:hidden lg:hidden hidden peer-checked:block"
+        ><img src="/images/icon-close.svg" alt="close"
+      /></label>
+      <div
+        class="hidden peer-checked:block top-24 bottom-0 left-0 right-0 fixed bg-black/50 z-20"
+      ></div>
+      <nav
+        class="hidden peer-checked:flex peer-checked:flex-col peer-checked:absolute peer-checked:top-20 peer-checked:right-[25%] peer-checked:px-32 peer-checked:py-8 bg-white rounded-lg peer-checked:mt-10 md:flex lg:flex lg:items-center lg:space-x-6 lg:mr-6 md:items-center md:space-x-6 md:mr-6 z-20 p-4"
+      >
+        <div
+          class="border-b-4 border-transparent hover:border-b-4 hover:border-green-500 hover:cursor-pointer transition-all duration-300 pb-5"
+        >
+          Home
+        </div>
+        <div
+          class="border-b-4 border-transparent hover:border-b-4 hover:border-green-500 hover:cursor-pointer transition-all duration-300 pb-5"
+        >
+          About
+        </div>
+        <div
+          class="border-b-4 border-transparent hover:border-b-4 hover:border-green-500 hover:cursor-pointer transition-all duration-300 pb-5"
+        >
+          Contact
+        </div>
+        <div
+          class="border-b-4 border-transparent hover:border-b-4 hover:border-green-500 hover:cursor-pointer transition-all duration-300 pb-5"
+        >
+          Blog
+        </div>
+        <div
+          class="border-b-4 border-transparent hover:border-b-4 hover:border-green-500 hover:cursor-pointer transition-all duration-300 pb-5"
+        >
+          Careers
+        </div>
+      </nav>
+      <button
+        class="hidden lg:block md:block mb-5 bg-gradient-to-r from-green-500 to-cyan-400 px-6 py-2 rounded-full text-white hover:opacity-70 cusrsor-pointer"
+      >
+        Request Invite
+      </button>
+    </header>
+    <main class="w-full bg-gray-100">
+      <section
+        class="flex flex-col md:flex-col justify-between bg-gray-50 h-auto lg:h-[700px] w-full lg:pl-32 relative"
+      >
+        <div class="flex flex-col-reverse lg:flex-row w-full h-full relative">
+          <div
+            class="flex flex-col justify-center items-center lg:items-start space-y-6 p-8 lg:w-1/3"
+          >
+            <h1 class="text-center font-sans text-6xl bold text-blue-950">
+              Next generation digital banking
+            </h1>
+            <p class="text-center text-gray-600">
+              Take your financial life online. Your Easybank account will be a
+              one-stop-shop for spending, saving, budgeting, investing, and much
+              more.
+            </p>
+            <button
+              class="mb-5 bg-gradient-to-r from-green-500 to-cyan-400 px-6 py-2 rounded-full text-white hover:opacity-70 cusrsor-pointer"
+            >
+              Request Invite
+            </button>
+          </div>
+          <div
+            class="relative lg:absolute lg:top-0 lg:-right-36 sm:bg-hero-pattern-mobile bg-hero-pattern w-full md:w-3/4 h-[300px] md:h-[400px] lg:h-full bg-no-repeat object-cover p-0 m-0 bg-right"
+          >
+            <!-- Mockup -->
+            <div
+              class="absolute top-10 right-36 scale-110 overflow-hidden bg-mockup-desktop bg-no-repeat bg-right object-cover bg-contain h-full w-full z-10"
+            ></div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div
+          class="flex flex-col justify-center space-y-6 my-20 px-8 md:px-16 lg:px-32"
+        >
+          <h2 class="font-sans text-5xl bold text-blue-950">
+            Why choose Easybank?
+          </h2>
+          <p class="text-gray-600">
+            We leverage Open Banking to turn your bank account into your
+            financial hub. Control your finances like never before.
+          </p>
+        </div>
+        <div
+          class="flex flex-col gap-y-9 lg:flex-row lg:justify-between px-8 md:px-16 lg:px-32 lg:space-x-6 mb-20"
+        >
+          <div class="flex flex-col items-center lg:items-start gap-y-9">
+            <img class="" src="/images/icon-online.svg" alt="icon" />
+            <h3 class="font-sans text-xl text-blue-950">Online Banking</h3>
+            <p class="text-gray-600">
+              Our modern web and mobile applications allow you to keep track of
+              your finances wherever you are in the world.
+            </p>
+          </div>
+          <div class="flex flex-col items-center lg:items-start gap-y-9">
+            <img src="/images/icon-budgeting.svg" alt="icon" />
+            <h3 class="font-sans text-xl text-blue-950">Simple Budgeting</h3>
+            <p class="text-gray-600">
+              See exactly where your money goes each month. Receive
+              notifications when you’re close to hitting your limits.
+            </p>
+          </div>
+          <div class="flex flex-col items-center lg:items-start gap-y-9">
+            <img src="/images/icon-onboarding.svg" alt="icon" />
+            <h3 class="font-sans text-xl text-blue-950">Fast Onboarding</h3>
+            <p class="text-gray-600">
+              We don’t do branches. Open your account in minutes online and
+              start taking control of your finances right away.
+            </p>
+          </div>
+          <div class="flex flex-col items-center lg:items-start gap-y-9">
+            <img src="/images/icon-api.svg" alt="icon" />
+            <h3 class="font-sans text-xl text-blue-950">Open API</h3>
+            <p class="text-gray-600">
+              Manage your savings, investments, pension, and much more from one
+              account. Tracking your money has never been easier.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="py-20 px-8 md:px-16 lg:px-32">
+        <h1 class="font-sans text-5xl bold text-blue-950 mb-20">
+          Latest Articles
+        </h1>
+        <div
+          class="flex flex-col gap-y-10 lg:flex-row items-center lg:justify-between lg:gap-x-9 mt-10"
+        >
+          <div class="rounded-lg">
+            <img
+              class="cursor-pointer hover:shadow-xl transition-shadow rounded-lg hover:scale-110"
+              src="/images/image-currency.jpg"
+              alt="image"
+            />
+            <div class="space-y-6 bg-white p-4">
+              <p class="text-xs text-gray-600">By Claire Robinson</p>
+              <h3
+                class="text-xl text-blue-950 font-sans font-medium hover:text-green-500 cursor-pointer"
+              >
+                Receive money in any currency with no fees
+              </h3>
+              <p class="text-gray-600">
+                The world is getting smaller and we’re becoming more mobile. So
+                why should you be forced to only receive money in a single …
+              </p>
+            </div>
+          </div>
+          <div class="rounded-lg">
+            <img
+              class="hover:shadow-xl transition-shadow rounded-lg hover:scale-110 cursor-pointer"
+              src="/images/image-restaurant.jpg"
+              alt="image"
+            />
+            <div class="space-y-6 bg-white p-4">
+              <p class="text-xs text-gray-600">By Wilson Hutton</p>
+              <h3
+                class="text-xl text-blue-950 font-sans font-medium hover:text-green-500 cursor-pointer"
+              >
+                Treat yourself without worrying about money
+              </h3>
+              <p class="text-gray-600">
+                Our simple budgeting feature allows you to separate out your
+                spending and set realistic limits each month. That means you …
+              </p>
+            </div>
+          </div>
+          <div class="rounded-lg">
+            <img
+              class="hover:shadow-xl transition-shadow rounded-lg hover:scale-110 cursor-pointer"
+              src="/images/image-plane.jpg"
+              alt="image"
+            />
+            <div class="space-y-6 bg-white p-4">
+              <p class="text-xs text-gray-600">By Wilson Hutton</p>
+              <h3
+                class="text-xl text-blue-950 font-sans font-medium hover:text-green-500 cursor-pointer"
+              >
+                Take your Digitalbank card wherever you go
+              </h3>
+              <p class="text-gray-600">
+                We want you to enjoy your travels. This is why we don’t charge
+                any fees on purchases while you’re abroad. We’ll even show you …
+              </p>
+            </div>
+          </div>
+          <div class="rounded-lg">
+            <img
+              class="hover:shadow-xl transition-shadow rounded-lg hover:scale-110 cursor-pointer"
+              src="/images/image-confetti.jpg"
+              alt="image"
+            />
+            <div class="space-y-6 bg-white p-4">
+              <p class="text-xs text-gray-600">By Claire Robinson</p>
+              <h3
+                class="text-xl text-blue-950 font-sans font-medium hover:text-green-500 cursor-pointer"
+              >
+                Our invite-only Beta accounts are now live!
+              </h3>
+              <p class="text-gray-600">
+                After a lot of hard work by the whole team, we’re excited to
+                launch our closed beta. It’s easy to request an invite through
+                the site ...
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer
+      class="bg-blue-950 text-gray-50 flex flex-col lg:flex-row items-center lg:justify-between py-16 px-8 md:px-16 lg:px-32"
+    >
+      <div class="lg:space-y-14">
+        <img src="/images/logo-light.svg" alt="logo" />
+        <div>
+          <ul class="flex items-center space-x-4 mt-6">
+            <li>
+              <img src="/images/icon-facebook.svg" alt="facebook icon" />
+            </li>
+            <li>
+              <img src="/images/icon-youtube.svg" alt="youtube icon" />
+            </li>
+            <li>
+              <img src="/images/icon-twitter.svg" alt="twitter icon" />
+            </li>
+            <li>
+              <img src="/images/icon-pinterest.svg" alt="pinterest icon" />
+            </li>
+            <li>
+              <img src="/images/icon-instagram.svg" alt="instagram icon" />
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="space-y-6 flex flex-col justify-center items-center mt-6 lg:mt-0"
+      >
+        <div class="hover:text-green-500 cursor-pointer">About Us</div>
+        <div class="hover:text-green-500 cursor-pointer">Contact</div>
+        <div class="hover:text-green-500 cursor-pointer">Blog</div>
+      </div>
+      <div
+        class="space-y-6 flex flex-col justify-center items-center mt-6 lg:mt-0"
+      >
+        <div class="hover:text-green-500 cursor-pointer">Careers</div>
+        <div class="hover:text-green-500 cursor-pointer">Support</div>
+        <div class="hover:text-green-500 cursor-pointer">Privacy Policy</div>
+      </div>
+      <div class="flex flex-col mt-6 items-center lg:items-end">
+        <button
+          class="mb-5 bg-gradient-to-r from-green-500 to-cyan-400 px-6 py-2 rounded-full text-white hover:opacity-70 cusrsor-pointer"
+        >
+          Request Invite
+        </button>
+        <p class="text-gray-600">© Easybank. All Rights Reserved</p>
+      </div>
+    </footer>
+  </body>
+</html>
