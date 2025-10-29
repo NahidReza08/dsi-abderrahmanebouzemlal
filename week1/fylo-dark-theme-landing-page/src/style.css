@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: "Open Sans VF";
+  src: url("./fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf")
+    format("truetype-variations");
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Raleway VF";
+  src: url("./fonts/Raleway/Raleway-VariableFont_wght.ttf")
+    format("truetype-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-body: "Open Sans VF", sans-serif; /* Body copy */
+  --font-heading: "Raleway VF", sans-serif; /* Headings, nav, CTAs */
+
+  --default-font-family: var(--font-body);
+  --default-font-size: 14px;
+  --default-font-weight: 400;
+
+  --color-navy-850: hsl(217, 28%, 15%); /* Intro + email signup */
+  --color-navy-900: hsl(218, 28%, 13%); /* Main background */
+  --color-navy-950: hsl(216, 53%, 9%); /* Footer background */
+  --color-navy-800: hsl(219, 30%, 18%); /* Testimonials background */
+
+  --color-light-850: hsl(217, 28%, 85%); /* Intro + email signup, lightened */
+  --color-light-900: hsl(213, 100%, 98%);
+  --color-light-950: hsl(216, 53%, 91%); /* Footer background, lightened */
+  --color-light-800: hsl(219, 30%, 82%);
+
+  --color-teal-200: hsl(176, 68%, 64%); /* CTA gradient inside */
+  --color-cyan-500: hsl(198, 60%, 50%); /* CTA gradient inside */
+  --color-red-500: hsl(0, 100%, 63%); /* Error */
+  --background-image-curvy-desktop: url("./images/bg-curvy-desktop.svg");
+  --background-image-curvy-mobile: url("./images/bg-curvy-mobile.svg");
+  --background-image-curvy-desktop-light: url("./images/bg-curvy-desktop-light.svg");
+  --background-image-moon: url("./images/moon-solid-full.svg");
+  --background-image-sun: url("./images/sun-solid-full.svg");
+  --background-image-quote: url("./images/bg-quotes.png");
+}
+
+/**/
+/* --color-light-850: hsl(217, 28%, 90%); */
+/* --color-light-950: hsl(216, 53%, 98%); */
+/* --color-light-800: hsl(219, 30%, 92%); */
+body {
+  font-family: var(--font-body);
+  font-size: var(--default-font-size);
+  font-weight: var(--default-font-weight);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+nav,
+.cta {
+  font-family: var(--font-heading);
+}
+
+section,
+footer {
+  @apply lg:px-64 md:px-32 px-16;
+}
+
+.grid-cell {
+  @apply space-y-8 p-6 bg-light-800 dark:bg-navy-800 rounded-lg shadow-lg;
+}
+
+.grid-cell p {
+  @apply font-body text-lg;
+}
+
+.grid-cell .profile {
+  @apply flex items-center gap-5;
+}
+
+.profile img {
+  @apply w-8 h-8 rounded-full;
+}
+
+.profile .name {
+  @apply font-heading font-semibold;
+}
+.profile h4 {
+  @apply font-body;
+}
