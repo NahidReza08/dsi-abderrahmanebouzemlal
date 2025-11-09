@@ -4,8 +4,5 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   base: '/dashbord-tailwind-svelte/',
-  plugins: [
-    svelte(),
-    tailwindcss(),
-  ],
+  plugins: [svelte(), tailwindcss()],
 })
