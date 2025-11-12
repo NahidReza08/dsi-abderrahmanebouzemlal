@@ -1,0 +1,5 @@
+.env
+.env.exemple
+.env.test
+node_modules
+.idea
