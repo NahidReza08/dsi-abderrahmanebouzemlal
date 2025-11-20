@@ -4,14 +4,13 @@
 	import Footer from '$lib/components/Footer.svelte';
 </script>
 
-
 <header class="w-full">
-	<Header/>
+	<Header />
 </header>
-<main class="w-full min-h-screen">
+<main class="min-h-screen w-full">
 	<slot />
 </main>
 
-<footer class="py-12 px-6 mt-20 w-full">
-	<Footer/>
+<footer class="mt-20 w-full px-6 py-12">
+	<Footer />
 </footer>

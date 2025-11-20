@@ -2,23 +2,22 @@
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 @font-face {
-  font-family: 'Style Script';
-  src: url('/fonts/StyleScript-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+	font-family: 'Style Script';
+	src: url('/fonts/StyleScript-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
-    font-family: 'Montserrat';
-    src: url('/fonts/static/Montserrat-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+	font-family: 'Montserrat';
+	src: url('/fonts/static/Montserrat-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
 
 @theme {
-    --font-header: "Style Script", 'Montserrat', sans-serif;
-    --font-body: "Montserrat", sans-serif;
+	--font-header: 'Style Script', 'Montserrat', sans-serif;
+	--font-body: 'Montserrat', sans-serif;
 }
-
