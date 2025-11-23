@@ -40,54 +40,59 @@
 		console.log(errors);
 		return Object.keys(errors).length === 0;
 	}
+	async function submitPost(imageFile) {
+		const formData = new FormData();
 
+		formData.append('title', title);
+		formData.append('content', content);
+		formData.append('excerpt', excerpt);
+		formData.append('author', author);
+		formData.append('status', status);
+		formData.append('published_at', publishDate);
+		formData.append('featuredImage', featuredImage?.name);
+		formData.append('category', category);
+		formData.append('tags', [...selectedTags]);
+
+		if (imageFile) {
+			formData.append('featuredImage', imageFile);
+		}
+
+		const response = await fetch('/api/posts', {
+			method: 'POST',
+			body: formData
+		});
+
+		return response.json();
+	}
 	async function handlePublish() {
 		if (!validate()) return alert('Please fix errors');
 		isSaving = true;
-		const res = await fetch('http://localhost:3000/api/posts', {
-			method: 'POST',
-			body: JSON.stringify({
-				title,
-				content,
-				excerpt,
-				author,
-				status: 'published',
-				published_at: publishDate,
-				category,
-				tags: [...selectedTags],
-				featuredImage: featuredImage?.name
-			}),
-		headers:{
-			'Content-Type':'application/json'
-		},
-		})
-		.then((res) => res.json())
+		await submitPost(featuredImage);
 		alert('Published!'); //notify user
 		isSaving = false;
-    window.location.href = `/blog/${data._id || data.id}`;
+		window.location.href = `/blog/${data._id || data.id}`;
 	}
 
 	async function handleSaveDraft() {
 		if (!validate()) return alert('Please fix errors');
 		isSaving = true;
 		const res = await fetch('http://localhost:3000/api/posts', {
-			'POST': JSON.stringify({
+			POST: JSON.stringify({
 				title,
 				content,
 				excerpt,
 				author,
 				status: 'draft',
-				published_at :publishDate,
+				published_at: publishDate,
 				category,
 				tags: [...selectedTags],
-				featuredImage: featuredImage?.name,
+				featuredImage: featuredImage?.name
 			}),
-			'Content-Type': 'application/json',
-		})
-		.then((res) => res.json())
+			'Content-Type': 'application/json'
+		}).then((res) => res.json());
 		isSaving = false;
 		alert('Draft saved!'); //notify user
-		window.location.href = `/blog/${res.id}`
+		window.location.href = `/blog/${res.id}`;
 	}
 </script>
 
@@ -112,7 +117,7 @@
 						class="w-full border-0 border-b-2 text-2xl font-bold {errors.title
 							? 'border-red-500'
 							: 'border-gray-300'}
-                   pb-3 transition-colors focus:border-gray-900 focus:outline-none focus:ring-0"
+                   pb-3 transition-colors focus:border-gray-900 focus:ring-0 focus:outline-none"
 					/>
 					{#if errors.title}
 						<p class="mt-2 flex items-center gap-1 text-sm text-red-500">
@@ -135,7 +140,7 @@
 					bind:fileInput
 				/>
 
-				<RichTextEditor bind:content={content} bind:editorElement error={errors.content} />
+				<RichTextEditor bind:content bind:editorElement error={errors.content} />
 
 				<section class="rounded-xl bg-white p-6 shadow-sm">
 					<label class="mb-3 block text-sm font-semibold text-gray-900">Excerpt (Optional)</label>

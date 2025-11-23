@@ -61,16 +61,18 @@
 			</header>
 
 			<!-- Featured Image -->
-			<img
-				src={post.featured_image}
-				alt={post.title}
-				class="aspect-video w-full rounded-2xl object-cover shadow-xl sm:aspect-[5/3]"
-			/>
+			{#if post.featured_image}
+				<img
+					src={post.featured_image}
+					alt={post.title}
+					class="aspect-video w-full rounded-2xl object-cover shadow-xl sm:aspect-[5/3]"
+				/>
+			{/if}
 
 			<!-- Article Content -->
 			<div class="prose prose-lg max-w-none text-gray-700">
 				<p class="lead text-xl font-medium text-gray-800">
-					{post.excerpt || 'No excerpt available.'}
+					{post.excerpt}
 				</p>
 				{@html post.content}
 			</div>

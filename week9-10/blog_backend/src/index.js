@@ -7,6 +7,6 @@ const port = process.env.PORT || 3000;
 const stage = process.env.APP_STAGE || 'none';
 
 app.listen(port, () => {
-  console.log(`Listening on http://localhost/${port}`);
-  console.log(`Environment:${stage}`);
+	console.log(`Listening on http://localhost/${port}`);
+	console.log(`Environment:${stage}`);
 });

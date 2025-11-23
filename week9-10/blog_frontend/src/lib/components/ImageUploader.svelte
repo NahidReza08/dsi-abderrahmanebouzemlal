@@ -1,11 +1,16 @@
 <script lang="js">
 	import { AlertCircle, Image, X } from 'lucide-svelte';
 
-	let { imageFile = $bindable(), preview= $bindable(), error, fileInput, remove } = $props();
+	let {
+		imageFile = $bindable(),
+		preview = $bindable(),
+		error = $bindable(),
+		fileInput,
+		remove
+	} = $props();
 
 	function handleUpload(e) {
 		const file = e.target.files?.[0] ?? null;
-		console.log(file, 'file');
 		if (!file) return;
 
 		if (file.size > 5 * 1024 * 1024) {
@@ -13,11 +18,27 @@
 			return;
 		}
 
+		error = '';
 		imageFile = file;
 		const reader = new FileReader();
 		reader.onload = () => (preview = reader.result);
 		reader.readAsDataURL(file);
-		console.log(file, 'preview');
+	}
+
+	function handleRemove() {
+		imageFile = null;
+		preview = null;
+		error = '';
+		if (fileInput) {
+			fileInput.value = '';
+			fileInput.type = 'file';
+			fileInput.accept = 'image/*';
+		} else {
+			console.error('File input element not found');
+		}
+		if (remove) {
+			remove();
+		}
 	}
 </script>
 
@@ -27,7 +48,7 @@
 
 {#if !preview}
 	<div
-		onclick={() => fileInput.click()}
+		onclick={() => fileInput?.click()}
 		class="cursor-pointer rounded-xl border-2 border-dashed border-gray-300 p-12 text-center transition hover:border-gray-900"
 	>
 		<Image size={48} class="mx-auto mb-4 text-gray-400" />
@@ -37,7 +58,11 @@
 {:else}
 	<div class="group relative">
 		<img src={preview} alt="Featured" class="h-64 w-full rounded-xl object-cover" />
-		<button class="absolute top-3 right-3 rounded-full bg-white/90 p-2 shadow-lg">
+		<button
+			onclick={handleRemove}
+			type="button"
+			class="absolute top-3 right-3 rounded-full bg-white/90 p-2 shadow-lg transition hover:bg-white"
+		>
 			<X size={20} />
 		</button>
 	</div>
