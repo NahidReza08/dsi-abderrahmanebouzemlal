@@ -1,5 +1,5 @@
 <script lang="js">
-	import { formatDate } from '$lib/utils';
+	import { formatDate } from '$lib/utils.js';
 
 	export let title = '';
 	export let excerpt = '';

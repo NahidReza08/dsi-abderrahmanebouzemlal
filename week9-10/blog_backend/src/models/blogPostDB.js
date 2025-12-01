@@ -24,7 +24,7 @@ const blogPostSchema = new mongoose.Schema(
 		},
 		excerpt: {
 			type: String,
-			maxlength: 300,
+			maxlength: 300
 		},
 		author: {
 			type: mongoose.Schema.Types.ObjectId,
@@ -40,16 +40,18 @@ const blogPostSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false
 		},
-        category: {
-            type: String,
-            required: true
+		category: {
+			type: String,
+			required: true
 		},
-        tags: [{
-            type: String,
-            ref: 'tags',
-            lowercase: true
-        }],
-        featured_image: String,
+		tags: [
+			{
+				type: String,
+				ref: 'tags',
+				lowercase: true
+			}
+		],
+		featured_image: String,
 		views: {
 			type: Number,
 			default: 0
@@ -82,15 +84,15 @@ blogPostSchema.pre('save', async function (next) {
 			const error = new Error('A post with this title already exists by the same author');
 			return next(error);
 		} else {
-            this.slug = this.title
-                .toLowerCase()
-                .replace(/[^\w\s-]/g, '')
-                .replace(/[\s_-]+/g, '-')
-                .replace(/^-+|-+$/g, '');
-        }
-        const wordsPerMinute = 200;
-	    const words = this.content.split(/\s+/).length;
-	    this.reading_time =  Math.ceil(words / wordsPerMinute);
+			this.slug = this.title
+				.toLowerCase()
+				.replace(/[^\w\s-]/g, '')
+				.replace(/[\s_-]+/g, '-')
+				.replace(/^-+|-+$/g, '');
+		}
+		const wordsPerMinute = 200;
+		const words = this.content.split(/\s+/).length;
+		this.reading_time = Math.ceil(words / wordsPerMinute);
 	}
 	next();
 });

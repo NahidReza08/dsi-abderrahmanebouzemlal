@@ -1,14 +1,14 @@
 import { BlogPost } from '../models/blogPostDB.js';
 import fs from 'node:fs';
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 export const getPosts = async (req, res) => {
 	try {
 		const blogPosts = await BlogPost.find({ status: 'published' })
-            .populate('author', 'username profile_picture')
-            .sort({ published_at: -1 })
-            .lean()
-            .exec();
+			.populate('author', 'username profile_picture')
+			.sort({ published_at: -1 })
+			.lean()
+			.exec();
 		res.json(blogPosts);
 	} catch (error) {
 		console.error('Error fetching posts:', error);
@@ -17,33 +17,32 @@ export const getPosts = async (req, res) => {
 };
 
 export const getTrendingPosts = async (req, res) => {
-  try {
-    const posts = await BlogPost.find({ status: 'published' })
-      .populate('author', 'username profile_picture')
-      .sort({ views: -1, likes: -1 })
-      .limit(10)
-      .lean()
-      .exec();
+	try {
+		const posts = await BlogPost.find({ status: 'published' })
+			.populate('author', 'username profile_picture')
+			.sort({ views: -1, likes: -1 })
+			.limit(10)
+			.lean()
+			.exec();
 
-    res.json(posts);
-
-  } catch (error) {
-    console.error('Error fetching trending posts:', error);
-    res.status(500).json({ error: error.message });
-  }
+		res.json(posts);
+	} catch (error) {
+		console.error('Error fetching trending posts:', error);
+		res.status(500).json({ error: error.message });
+	}
 };
 
 export const getPostById = async (req, res) => {
 	try {
 		const { id } = req.params;
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ error: 'Invalid post ID' });
-        }
+		if (!mongoose.Types.ObjectId.isValid(id)) {
+			return res.status(400).json({ error: 'Invalid post ID' });
+		}
 		const post = await BlogPost.findById(id)
-            .populate('author', 'username profile_picture bio')
-            .sort({ published_at: -1 })
-            .exec();
-
+			.populate('author', 'username profile_picture bio')
+			.sort({ published_at: -1 })
+			.exec();
+		console.log(post.featured_image);
 		if (!post) {
 			return res.status(404).json({ error: 'Post not found' });
 		}
@@ -55,53 +54,54 @@ export const getPostById = async (req, res) => {
 	}
 };
 
-export const getRelated = async(req, res) => {
-    try {
-        const {id} = req.params;
-        const post = await BlogPost.findById(id)
-            .populate('author', 'username profile_picture bio')
-            .sort({published_at: -1})
-            .exec();
-        const related = await BlogPost.find({category: post.category})
-            .populate('author', 'username profile_picture bio')
-            .sort({published_at: -1})
-            .exec();
-        res.json(related);
-    } catch (error) {
-        console.error('Error fetching related posts:', error);
-        res.status(500).json({ error: 'Failed to fetch related posts' });
-    }
-}
+export const getRelated = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const post = await BlogPost.findById(id)
+			.populate('author', 'username profile_picture bio')
+			.sort({ published_at: -1 })
+			.exec();
+		const related = await BlogPost.find({ category: post.category })
+			.populate('author', 'username profile_picture bio')
+			.sort({ published_at: -1 })
+			.exec();
+		res.json(related);
+	} catch (error) {
+		console.error('Error fetching related posts:', error);
+		res.status(500).json({ error: 'Failed to fetch related posts' });
+	}
+};
 
 export const createPost = async (req, res) => {
-  try {
-    const postData = {
-      ...req.body,
-      slug: req.body.title
-    };
+	try {
+		const postData = {
+			...req.body,
+			slug: req.body.title
+		};
 
-    if (req.file) {
-      postData.featuredImage = `/uploads/images/${req.file.filename}`;
-    }
+		if (req.file) {
+			postData.featured_image = `/uploads/images/${req.file.filename}`;
+			console.log('featured Image', postData.featured_image);
+		}
 
-    const newPost = new BlogPost(postData);
-    await newPost.save();
-    res.status(201).json(newPost);
-  } catch (error) {
-    if (req.file) {
-      fs.unlink(req.file.path, (err) => {
-        if (err) console.error('Error deleting file:', err);
-      });
-    }
+		const newPost = new BlogPost(postData);
+		await newPost.save();
+		res.status(201).json(newPost);
+	} catch (error) {
+		if (req.file) {
+			fs.unlink(req.file.path, (err) => {
+				if (err) console.error('Error deleting file:', err);
+			});
+		}
 
-    console.error('Error creating post:', error);
+		console.error('Error creating post:', error);
 
-    if (error.name === 'ValidationError') {
-      return res.status(400).json({ error: error.message });
-    }
+		if (error.name === 'ValidationError') {
+			return res.status(400).json({ error: error.message });
+		}
 
-    res.status(500).json({ error: 'Failed to create post' });
-  }
+		res.status(500).json({ error: 'Failed to create post' });
+	}
 };
 
 export const updatePost = async (req, res) => {
@@ -146,11 +146,7 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
 	try {
 		const { id } = req.params;
-		const post = await BlogPost.findByIdAndUpdate(
-			id,
-			{ $inc: { likes: 1 } },
-			{ new: true }
-		);
+		const post = await BlogPost.findByIdAndUpdate(id, { $inc: { likes: 1 } }, { new: true });
 
 		if (!post) {
 			return res.status(404).json({ error: 'Post not found' });

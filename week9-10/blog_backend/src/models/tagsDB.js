@@ -1,7 +1,7 @@
-import mongoose from './connect.js'
+import mongoose from './connect.js';
 
 const tagsSchema = new mongoose.Schema({
-    name: {type: String, required: true},
-})
+	name: { type: String, required: true }
+});
 
-export const tags = mongoose.model('tags', tagsSchema)
+export const tags = mongoose.model('tags', tagsSchema);
