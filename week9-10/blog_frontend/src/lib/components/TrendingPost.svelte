@@ -111,7 +111,7 @@
 						onclick={() => goToSlide(i)}
 						onkeydown={(e) => e.key === 'Enter' && goToSlide(i)}
 						aria-label={`Go to slide ${i + 1}`}
-					/>
+					></button>
 				{/each}
 			</div>
 		{/if}

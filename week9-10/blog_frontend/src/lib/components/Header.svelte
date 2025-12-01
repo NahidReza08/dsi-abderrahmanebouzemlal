@@ -1,5 +1,13 @@
 <script>
 	let mobileMenuOpen = $state(false);
+	import {
+		user,
+		isAuthenticated,
+		openSignupModal,
+		openLoginModal,
+		authFunctions
+	} from '$lib/data/authStore.js';
+	import DropDown from '$lib/components/DropDown.svelte';
 </script>
 
 <header class="sticky top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur-md">
@@ -27,13 +35,29 @@
 				>
 					Blog
 				</a>
-				<a
-					href="/new-story"
-					class="flex items-center gap-2 font-medium text-gray-600 transition hover:text-gray-700"
-				>
-					<img src="/Image/icons/Edit3.svg" alt="edit" class="h-4 w-4" />
-					Write
-				</a>
+				{#if $isAuthenticated}
+					<a
+						href="/new-story"
+						class="flex items-center gap-2 font-medium text-gray-600 transition hover:text-gray-700"
+					>
+						<img src="/Image/icons/Edit3.svg" alt="edit" class="h-4 w-4" />
+						Write
+					</a>
+					{#if $user}
+						<DropDown user={$user}/>
+					{/if}
+				{:else}
+					<div class="flex gap-4">
+						<button
+							class="font-medium text-gray-600 transition hover:cursor-pointer hover:text-gray-700"
+							onclick={openLoginModal}>Login</button
+						>
+						<button
+							class="rounded-full bg-gray-800 px-4 py-2 font-medium text-white transition hover:cursor-pointer hover:bg-gray-700"
+							onclick={() => openSignupModal('signup')}>Sign Up</button
+						>
+					</div>
+				{/if}
 			</nav>
 
 			<button

@@ -1,5 +1,5 @@
 <script lang="js">
-	let { label, icon, required = false } = $props();
+	let { label, icon, children, required = false } = $props();
 </script>
 
 <section class="rounded-xl bg-white p-6 shadow-sm">
@@ -8,5 +8,5 @@
 		{label}
 		{#if required}<span class="text-red-500">*</span>{/if}
 	</label>
-	<slot />
+	{@render children()}
 </section>

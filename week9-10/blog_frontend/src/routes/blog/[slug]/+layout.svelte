@@ -1,3 +1,6 @@
+<script>
+	const {children} = $props();
+</script>
 <main>
-	<slot />
+	{@render children()}
 </main>

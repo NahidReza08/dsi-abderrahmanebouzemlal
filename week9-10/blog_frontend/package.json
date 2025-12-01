@@ -29,7 +29,7 @@
 		"prettier-plugin-svelte": "^3.4.0",
 		"prettier-plugin-tailwindcss": "^0.7.1",
 		"svelte": "^5.41.0",
-		"tailwindcss": "^4.1.14",
+		"tailwindcss": "^4.1.17",
 		"vite": "^7.1.10"
 	},
 	"keywords": [
@@ -37,13 +37,16 @@
 	],
 	"dependencies": {
 		"@friendofsvelte/tipex": "^0.0.9",
+		"@heroicons/vue": "^2.2.0",
 		"@hugeicons/svelte": "^1.0.2",
+		"@tailwindplus/elements": "^1.0.19",
 		"@tiptap/core": "^3.10.8",
 		"@tiptap/extension-color": "^3.11.0",
 		"@tiptap/extension-link": "^3.11.0",
 		"@tiptap/extension-list": "^3.10.8",
 		"@tiptap/extension-text-style": "^3.10.8",
 		"@tiptap/starter-kit": "^3.10.8",
-		"lucide-svelte": "^0.553.0"
+		"lucide-svelte": "^0.553.0",
+		"svelte-headlessui": "^0.0.46"
 	}
 }
